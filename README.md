@@ -1,5 +1,7 @@
 #  HIBPKit
 
+[![CI Status](https://img.shields.io/travis/kcramer/com/HIBPKit.svg?style=flat)](https://travis-ci.com/kcramer/HIBPKit)
+
 HIBPKit is a Swift framework to query the [Have I Been Pwned?](https://haveibeenpwned.com/) database.
 
 It supports these queries:

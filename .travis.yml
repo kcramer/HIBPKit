@@ -1,0 +1,9 @@
+matrix:
+  include:
+    - name: "macOS Xcode 10.1 Test"
+      osx_image: xcode10.1
+      xcode_project: HIBPKit.xcworkspace
+      xcode_scheme: HIBPKit
+      xcode_destination: platform=macOS
+      os: osx
+      language: swift
