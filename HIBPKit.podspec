@@ -17,6 +17,4 @@ HIBPKit is a Swift framework to query the Have I Been Pwned? database.
   s.watchos.deployment_target = '3.0'
 
   s.source_files = 'HIBPKit/**/*.swift'
-  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/HIBPKit/HIBPKit/CommonCrypto' }
-  s.preserve_paths = 'HIBPKit/CommonCrypto/module.modulemap'
 end
