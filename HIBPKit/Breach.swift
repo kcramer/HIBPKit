@@ -28,7 +28,7 @@ public struct Breach: Codable, Equatable {
     /// The number of accounts affected in the breach.
     public let pwnCount: Int
     /// A description of the breach in HTML markup.
-    public let description: String
+    public let descriptionText: String
     /// The classes of data included in the breach.
     public let dataClasses: [String]
     /**
@@ -72,7 +72,7 @@ public struct Breach: Codable, Equatable {
         case addedDate = "AddedDate"
         case modifiedDate = "ModifiedDate"
         case pwnCount = "PwnCount"
-        case description = "Description"
+        case descriptionText = "Description"
         case dataClasses = "DataClasses"
         case isVerified = "IsVerified"
         case isFabricated = "IsFabricated"
