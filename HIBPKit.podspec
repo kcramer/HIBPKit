@@ -11,6 +11,7 @@ HIBPKit is a Swift framework to query the Have I Been Pwned? database.
   s.author           = { 'Kevin Cramer' => 'kevinx@sent.com' }
   s.source           = { :git => 'https://github.com/kcramer/HIBPKit.git', :tag => s.version.to_s }
 
+  s.swift_version = '5.0'
   s.ios.deployment_target = '11.0'
   s.osx.deployment_target = '10.13'
   s.tvos.deployment_target = '11.0'

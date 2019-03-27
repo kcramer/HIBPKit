@@ -1,7 +1,7 @@
 matrix:
   include:
-    - name: "macOS Xcode 10.1 Test"
-      osx_image: xcode10.1
+    - name: "macOS Xcode 10.2 Test"
+      osx_image: xcode10.2
       xcode_project: HIBPKit.xcodeproj
       xcode_scheme: HIBPKit
       xcode_destination: platform=macOS
