@@ -14,10 +14,9 @@ enum Crypto {
     /// Return the SHA1 hash of a Data object.
     static func sha1(data: Data) -> Data {
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
-        data.withUnsafeBytes { bytes in
-            _ = CC_SHA1(bytes, CC_LONG(data.count), &hash)
-        }
-        return Data(bytes: hash)
+        let bytes = [UInt8](data)
+        CC_SHA1(bytes, CC_LONG(data.count), &hash)
+        return Data(hash)
     }
 
     /// Return the SHA1 hash of a string as a hexadecimal string.
