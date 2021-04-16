@@ -10,7 +10,10 @@ import XCTest
 import HIBPKit
 
 class PastesByAccountTests: XCTestCase {
-    let service = HIBPService(userAgent: TestingConstants.userAgent)
+    let service = HIBPService(userAgent: TestingConstants.userAgent,
+                              apiKey: "",
+                              baseURL: nil)
+
     var delay = false
 
     override func setUp() {
