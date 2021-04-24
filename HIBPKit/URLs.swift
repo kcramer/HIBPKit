@@ -16,38 +16,43 @@ internal enum HIBPURL: CodableServiceURL {
     /// A request to get the occurrences of a password in reported breaches.
     case passwordsByRange(String)
     /// A request to get the breaches for a given domain.
-    case breaches(String?)
+    case breaches(String?, String?)
     /// A request to get the breaches for a given account/email with a flag
     /// to specify if unverified breaches should be included.
-    case breachesByAccount(String, Bool)
+    case breachesByAccount(String, Bool, String?)
     /// A request to get the pastes for an email address.
-    case pastesByAccount(String)
+    case pastesByAccount(String, String?)
 
     /// The constructed URL for the request.
     public var url: URL? {
         let psswdBaseURL = "https://api.pwnedpasswords.com"
-        let baseURL = "https://haveibeenpwned.com"
+        let apiBaseURL = "https://haveibeenpwned.com"
         switch self {
         case .passwordsByRange(let prefix):
             let comps = URLComponents(string: psswdBaseURL + "/range/")
             return comps?.url?.appendingPathComponent(prefix)
-        case .breachesByAccount(let account, let unverified):
-            var comps = URLComponents(string: baseURL + "/api/v2/breachedaccount/")
-            if unverified {
-                let item = URLQueryItem(name: "includeUnverified", value: "true")
-                comps?.queryItems = [item]
+        case .breachesByAccount(let account, let unverified, let baseURL):
+            let baseURL = baseURL ?? apiBaseURL
+            var comps = URLComponents(string: baseURL + "/api/v3/breachedaccount/")
+            let truncate = URLQueryItem(name: "truncateResponse", value: "false")
+            comps?.queryItems = [truncate]
+            if !unverified {
+                let item = URLQueryItem(name: "includeUnverified", value: "false")
+                comps?.queryItems = [truncate, item]
             }
             return comps?.url?.appendingPathComponent(account)
-        case .breaches(let domain):
-            var comps = URLComponents(string: baseURL + "/api/v2/breaches/")
+        case .breaches(let domain, let baseURL):
+            let baseURL = baseURL ?? apiBaseURL
+            var comps = URLComponents(string: baseURL + "/api/v3/breaches/")
             if let domain = domain {
                 let item = URLQueryItem(name: "domain", value: domain)
                 comps?.queryItems = [item]
             }
             return comps?.url
-        case .pastesByAccount(let email):
+        case .pastesByAccount(let email, let baseURL):
+            let baseURL = baseURL ?? apiBaseURL
             let comps = URLComponents(
-                string: baseURL + "/api/v2/pasteaccount/")
+                string: baseURL + "/api/v3/pasteaccount/")
             return comps?.url?.appendingPathComponent(email)
         }
     }

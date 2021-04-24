@@ -11,6 +11,8 @@ import Foundation
 /// A service that provides results from the Have I Been Pwned? database.
 final public class HIBPService: CodableService {
     internal let userAgent: String?
+    internal let apiKey: String?
+    internal let baseURL: String?
     internal lazy var session: URLSession = {
         return getSession()
     }()
@@ -27,8 +29,20 @@ final public class HIBPService: CodableService {
      - parameter userAgent: The user agent to send to the service.  It
         identifies your app or service.  Required by the HIBP service.
      */
-    public init(userAgent: String) {
+    public init(userAgent: String, apiKey: String? = nil, baseURL: String? = nil) {
         self.userAgent = userAgent
+        self.apiKey = apiKey
+        self.baseURL = baseURL
+    }
+
+    /// Returns a session with a configured user agent.
+    func getSession() -> URLSession {
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = [
+            "User-Agent": self.userAgent as Any,
+            "Hibp-Api-Key": self.apiKey as Any
+            ].filter { $0.1 is String }
+        return URLSession(configuration: config)
     }
 
     /// Standard ISO8601 date formatter.
@@ -147,9 +161,9 @@ final public class HIBPService: CodableService {
     public func allBreaches(for domain: String?,
                             fetch: FetchFunction? = nil,
                             completion: @escaping BreachCompletion) -> ServiceRequest? {
-        return processQuery(url: HIBPURL.breaches(domain),
-                     fetch: fetch,
-                     completion: completion)
+        return processQuery(url: HIBPURL.breaches(domain, baseURL),
+                            fetch: fetch,
+                            completion: completion)
     }
 
     /**
@@ -167,9 +181,11 @@ final public class HIBPService: CodableService {
                          unverified: Bool = false,
                          fetch: FetchFunction? = nil,
                          completion: @escaping BreachCompletion) -> ServiceRequest? {
-        return processQuery(url: HIBPURL.breachesByAccount(account, unverified),
-                     fetch: fetch,
-                     completion: completion)
+        return processQuery(
+            url: HIBPURL.breachesByAccount(account, unverified, baseURL),
+            fetch: fetch,
+            completion: completion
+        )
     }
 
     /**
@@ -185,8 +201,8 @@ final public class HIBPService: CodableService {
     public func pastes(for email: String,
                        fetch: FetchFunction? = nil,
                        completion: @escaping PasteCompletion) -> ServiceRequest? {
-        return processQuery(url: HIBPURL.pastesByAccount(email),
-                     fetch: fetch,
-                     completion: completion)
+        return processQuery(url: HIBPURL.pastesByAccount(email, baseURL),
+                            fetch: fetch,
+                            completion: completion)
     }
 }

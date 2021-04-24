@@ -10,7 +10,10 @@ import XCTest
 import HIBPKit
 
 class BreachesByAccountTests: XCTestCase {
-    let service = HIBPService(userAgent: TestingConstants.userAgent)
+    let service = HIBPService(userAgent: TestingConstants.userAgent,
+                              apiKey: TestingConstants.apiKey,
+                              baseURL: TestingConstants.baseURL)
+
     var delay = false
 
     override func setUp() {

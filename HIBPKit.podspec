@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HIBPKit'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'A Swift framework to query the Have I Been Pwned? database.'
   s.description      = <<-DESC
 HIBPKit is a Swift framework to query the Have I Been Pwned? database.

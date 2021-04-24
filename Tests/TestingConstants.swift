@@ -10,4 +10,10 @@ import Foundation
 
 enum TestingConstants {
     static let userAgent = "HIBPKit-Swift-Library"
+    static let apiKey = environmentVariable(name: "HIBP_API_KEY")
+    static let baseURL = environmentVariable(name: "HIBP_BASE_URL")
+
+    static func environmentVariable(name: String) -> String? {
+        return ProcessInfo.processInfo.environment[name]
+    }
 }
