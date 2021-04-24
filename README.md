@@ -4,6 +4,8 @@
 
 HIBPKit is a Swift framework to query the [Have I Been Pwned?](https://haveibeenpwned.com/) database.
 
+HIBPKit supports the v3 API.  In order to query breaches, you will need to acquire an [API key](https://haveibeenpwned.com/API/Key) and provide it when you initialize the service. 
+
 It supports these queries:
 
 * Check if a password was found in a breach.
