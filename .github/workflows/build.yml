@@ -15,4 +15,5 @@ jobs:
     - name: Test
       env:
         HIBP_API_KEY: ${{ secrets.HIBP_API_KEY }}
+        HIBP_BASE_URL: ${{ secrets.HIBP_BASE_URL }}
       run: swift test -v
