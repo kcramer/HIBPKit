@@ -11,8 +11,8 @@ import HIBPKit
 
 class PastesByAccountTests: XCTestCase {
     let service = HIBPService(userAgent: TestingConstants.userAgent,
-                              apiKey: "",
-                              baseURL: nil)
+                              apiKey: TestingConstants.apiKey,
+                              baseURL: TestingConstants.baseURL)
 
     var delay = false
 
